@@ -39,11 +39,11 @@ ELSEIF TALENT:161 == 0 && TALENT:162 == 0 && TALENT:169 == 0
         RETURN 0
 ENDIF
 IF TALENT:128
-    ;작은 체형なら순종이 4이상かつ마조끼が4이상かつ확장경험10이상じゃないと実行できない
+    ;[작은체형]なら순종이 4이상かつ마조끼が4이상かつ확장경험10이상じゃないと実行できない
     SIF ABL:10 <= 3 || ABL:21 <= 3 || EXP:32 < 10 || EXP:33 < 10
         RETURN 0
 ELSEIF TALENT:127
-    ;조교 대상이 소인체형の場合, 上の条件に加え주인이 금단의 지식 보유자가 아니면 불가
+    ;조교 대상이 [소인]の場合, 上の条件に加え주인이 금단의 지식 보유자가 아니면 불가
      SIF TALENT:MASTER:56 == 0 || ABL:10 <= 3 || ABL:21 <= 3 || EXP:32 < 10 || EXP:33 < 10
         RETURN 0
 ELSE
@@ -181,7 +181,7 @@ LOCAL = EJACULATIONCHECK_PALAM_10_2(TARGET, LOCAL)
 ;조교자의 C감각을 본다
 LOCAL = EJACULATIONCHECK_ABL_0_1(PLAYER, LOCAL)
 
-SIF TALENT:PLAYER:120 || TALENT:PLAYER:121
+SIF EXIST_PENIS(PLAYER)
     BASE:PLAYER:2 += LOCAL
 
 ;-------------------------------------------------
@@ -224,7 +224,7 @@ TCVAR:0 += LOCAL:1
 TCVAR:42 += (PLAYER == MASTER) ?  LOCAL:1 # 0
 ;A경험
 TCVAR:1 += LOCAL:2
-IF ASSIPLAY == 0 && (TALENT:MASTER:120 || TALENT:MASTER:121 || TALENT:MASTER:1)
+IF ASSIPLAY == 0 && EXIST_BAR(MASTER)
     CFLAG:173 += LOCAL:1
     CFLAG:174 += LOCAL:2
 ENDIF

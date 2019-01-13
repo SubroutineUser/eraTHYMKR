@@ -714,6 +714,8 @@ ENDSELECT
 ;-------------------------------------------------
 @EXIST_PENIS(ARG)
 #FUNCTION
+SIF ARG < 0
+    RETURNF 0
 RETURNF TALENT:ARG:120 || TALENT:ARG:121
 
 ;-------------------------------------------------

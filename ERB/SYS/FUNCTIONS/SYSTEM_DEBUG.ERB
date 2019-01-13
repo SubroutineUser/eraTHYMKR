@@ -1033,7 +1033,7 @@ ELSE
     PRINTFORML %ABLNAME:LOCAL% LV 변경(현재 {ABL:LOCAL})
     PRINTFORML 수치 입력[0-5](무효값으로 취소)
     INPUT
-    SIF RESULT < 0 || RESULT > 10
+    SIF RESULT < 0 || RESULT > 5
         RESTART
     ABL:LOCAL = RESULT
 ENDIF
@@ -1263,21 +1263,21 @@ RESTART
 @EDIT_RELATION
 DRAWLINE
 PRINTL 현재의 상성
-FOR LOCAL, 0, 215
+FOR LOCAL, 0, 500
     SIF RELATION:LOCAL <= 0
         CONTINUE
     LOCAL:1 = LOCAL + 100
     PRINTFORMLC [{LOCAL, 3}]%ITEMNAME:(LOCAL:1)%({RELATION:LOCAL}％)
 NEXT
 PRINTL 
-PRINTL [0-214] 번호에 대응하는 캐릭터와의 상성 변경(무효값으로 취소)
+PRINTL [0-499] 번호에 대응하는 캐릭터와의 상성 변경(무효값으로 취소)
 PRINTLC [1000] 그만둔다
 
 $INPUT_LOOP
 INPUT
 SIF RESULT == 1000
     RETURN 0
-SIF RESULT < 0 || RESULT > 214
+SIF RESULT < 0 || RESULT > 500
     GOTO INPUT_LOOP
 LOCAL = RESULT
 LOCAL:1 = RESULT + 100
@@ -2207,9 +2207,9 @@ RETURNF (ARG != 0 && ARG != 1 && ARG != 14) ? 0 # 1
 ;EQUIP에 설명을 부여하고 싶다면 여길 사용...
 @DEFINE_EQUIP, ARG
 IF ARG == 0
-    PRINT 복숭아색사탕/인계로 EX화 해제 선택
+    PRINT EX해제 사탕/인계로 EX화 해제 선택
 ELSEIF ARG == 1
-    PRINT 남색사탕/부모에게서 독립하는 시간 단축
+    PRINT 성장촉진 사탕/부모에게서 독립하는 시간 단축
 ELSEIF ARG == 14
     PRINT 수면제
 ELSE
@@ -2756,6 +2756,16 @@ ELSEIF ARG == 32
     PRINT 펑션에서의 종족 표시(분류)
 ELSEIF ARG == 33
     PRINT 펑션에서의 종족 표시(상세)
+ELSEIF ARG == 37
+    PRINT 아버지의 이름
+ELSEIF ARG == 38
+    PRINT 친모의 이름
+ELSEIF ARG == 39
+    PRINT 유모의 이름
+ELSEIF ARG == 40
+    PRINT 임신 시킨 사람 이름
+ELSEIF ARG == 41
+    PRINT 유모에게 친모의 이름
 ELSEIF ARG == 87
     PRINT 대사 측에서 정의한 고유 초콜릿명
 ELSEIF ARG == 88
